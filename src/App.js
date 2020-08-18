@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
-function App() {
+import Home from './containers/home/Home.js'
+import Settings from './containers/settings/Settings.js'
+
+import classes from './App.module.scss'
+
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Switch>
+        <Route path='/settings' component={Settings} />
+        <Route path='/' exact component={Home} />
+        <Redirect to='/' />
+      </Switch>
+    </>
+  )
 }
 
-export default App;
+export default App
