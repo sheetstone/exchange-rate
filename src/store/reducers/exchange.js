@@ -12,7 +12,7 @@ const initalState = {
   symbols: [],
   baseCurrency: 'EUR',
   selectedSymbols: ['USD', 'JPY', 'CAD', 'CNY'],
-  refreshingRate: 3,
+  refreshingRate: 10,
   currentSources: 'https://api.exchangeratesapi.io/'
 }
 
