@@ -2,16 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+import exchange from './store/reducers/exchange'
 import App from './App.js'
 import * as serviceWorker from './serviceWorker'
 
 import './globalStyle/custom.scss'
 
+const store = createStore(exchange)
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

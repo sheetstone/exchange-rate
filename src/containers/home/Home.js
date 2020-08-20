@@ -1,40 +1,72 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+
+import * as actCreator from '../../store/actions/actions'
 import { getHistory } from '../../api/exchangeRateData'
+import DataTable from './dataTable/DataTable'
+import DataChart from './dataChart/DataChart'
+import CalcModal from './calcModal/CalcModal'
+import Layout from '../../components/HOC/Layout/Layout'
 
 const Home = props => {
-  const [data, setData] = useState(null)
+  const {
+    rates,
+    selectedSymbols,
+    onLoadExchangeRate,
+    dateRange,
+    baseCurrency
+  } = props
+  const [modalShow, setModalShow] = useState(false)
+  const [calcCur, setCalcCur] = useState(selectedSymbols[0])
 
   useEffect(() => {
+    const symbolStr = selectedSymbols.join(',')
+    const [startDate, endDate] = dateRange
     getHistory(
-      `history?start_at=2020-07-17&end_at=2020-08-17`
+      `history?start_at=${startDate}&end_at=${endDate}&symbols=${symbolStr}&base=${baseCurrency}`
     ).then(res => {
-      setData(res)
+      onLoadExchangeRate(res.rates)
     })
   }, [])
 
-  console.log(data)
-
-  if (!data) {
+  if (!rates) {
     return <h1>Loading...</h1>
   }
 
-  let tableRow = [];
-  const dateArray = Object.keys(data.rates);
-  const symbolArray = Object.keys(data.rates[dateArray[0]]);
-  console.log(dateArray);
-  console.log(symbolArray);
-  tableRow = symbolArray.map(symbolKey => {
-    const tableCell = [];
-    tableCell.push(<td>{symbolKey}</td>);
-    tableCell.push(dateArray.map(dateKey => {
-      return <td>{data.rates[dateKey][symbolKey]}</td>
-    }))
-    return <tr>{tableCell}</tr>
-  })
+  const handleModalClose = () => setModalShow(false);
+  const handleRowClick = sym => {
+    console.log(sym)
+    setCalcCur(sym)
+    setModalShow(true)
+  }
 
-  return <table border='1'>
-    {tableRow}
-  </table>
+  return (
+    <>
+      <Layout>
+        <DataTable rowClicked={handleRowClick} />
+        <DataChart />
+        <CalcModal
+          show={modalShow}
+          modalClosed={handleModalClose}
+          calcCur={calcCur}
+        />
+      </Layout>
+    </>
+  )
 }
 
-export default Home
+const mapStateToProps = state => ({
+  rates: state.rates,
+  dateRange: state.dateRange,
+  selectedSymbols: state.selectedSymbols,
+  baseCurrency: state.baseCurrency
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoadExchangeRate: rates =>
+      dispatch(actCreator.loadExChangeRate({ rates: rates }))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

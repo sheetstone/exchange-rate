@@ -1,0 +1,51 @@
+@import '../../../globalStyle/variables';
+
+.NavigationItem {
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+
+    a{
+        color: white;
+        text-decoration: none;
+        height: 100%;
+        padding: 16px 14px;
+        border-bottom: 4px solid transparent;
+        box-sizing: border-box;
+        display: block;
+
+        &:hover, &:active, &.active{
+            background-color: darken($primary, 10%);
+            border-bottom: 4px solid darken($primary, 20%);
+            color: white;
+        }
+    }
+
+    @media (max-width: 500px){
+        display: flex;
+        width: 50%;
+        height: auto;
+        align-items: stretch;
+ 
+        a {
+            color: white;
+            padding: 12px 8px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 0 none;
+
+            &:hover, &:active{
+                background-color: darken($primary, 20%);
+                border-bottom: 0 none;
+            }
+            &.active{
+                color: white;
+                background-color: darken($primary, 10%);
+                border-bottom: 0 none;
+            }
+        }
+    }
+}

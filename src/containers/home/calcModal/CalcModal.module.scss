@@ -1,0 +1,24 @@
+@import '../../../globalStyle/variables';
+
+.covertGroup{
+  display: flex;
+}
+.convertInput {
+  background: transparent;
+  border-radius: 6px;
+  border: 1px solid #DFE1E5;
+  color: #70757A;
+  font-size: 14px;
+  height: 36px;
+  padding: 0 0 0 12px;
+}
+.covertLabel {
+  width: 15%;
+  margin-top: 1px;
+  border-radius: 0 5px 5px 0;
+  align-items: center; 
+  background: $warning;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+}

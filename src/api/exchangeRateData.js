@@ -1,7 +1,6 @@
 import { baseUrl } from './baseUrl'
 
 export async function getHistory(param) {
-  console.log(param)
   return get(param)
 }
 

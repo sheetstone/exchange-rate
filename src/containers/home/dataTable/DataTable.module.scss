@@ -1,0 +1,15 @@
+.ExchangeTable{
+  tbody tr {
+    &:hover{
+      background: lightblue;
+      cursor: pointer;
+    }
+  }
+  th{
+    font-size: 0.85em;
+  }
+  td {
+    text-align:right;
+    padding:0.35em 0.75em ;
+  }
+}

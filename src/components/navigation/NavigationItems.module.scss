@@ -1,0 +1,16 @@
+@import '../../globalStyle/variables';
+
+.NavigationItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: $primary;
+
+    @media (max-width: 500px){
+        flex-flow: row;
+    }
+}

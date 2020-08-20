@@ -1,0 +1,28 @@
+.selectionList{
+  .selectionHeader{
+    width: 100%;
+  }
+  .symbolItem{
+    float:left;
+    margin: 0.5em 0.5em;
+    height: 2em;
+  }
+}
+
+.hline{
+  width: 100%;
+  clear: both;
+}
+.countryInput{
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.countryFlag{
+  margin-right: 0.4em;
+  width: 22px;
+}
+.countrylabel{
+  cursor: pointer;
+  pointer-events: fill;
+}
