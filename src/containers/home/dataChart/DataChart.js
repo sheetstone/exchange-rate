@@ -7,7 +7,7 @@ import dataToArr from '../../../utils/dataToArr';
 
 const DataChart = props => {
   const { rates, selectedSymbols } = props;
-  const chartDataArray = [ ['Exchange Rate', ...selectedSymbols] , ...dataToArr(rates)];
+  const chartDataArray = [ ['Exchange Rate', ...selectedSymbols] , ...dataToArr(rates, selectedSymbols)];
   
   return (
     <>
