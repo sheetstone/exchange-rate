@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Navigation from '../../navigation/NavigationItems';
 import classes from './Layout.module.scss';

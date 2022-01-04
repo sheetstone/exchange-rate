@@ -17,21 +17,36 @@ const Home = props => {
     baseCurrency
   } = props
   const [modalShow, setModalShow] = useState(false)
+  const [loadError, setLoadError] = useState(false)
   const [calcCur, setCalcCur] = useState(selectedSymbols[0])
 
   useEffect(() => {
     const symbolStr = selectedSymbols.join(',')
     const [startDate, endDate] = dateRange
     getHistory(
-      `history?start_at=${startDate}&end_at=${endDate}&symbols=${symbolStr}&base=${baseCurrency}`
+      `&start_at=${startDate}&end_at=${endDate}&currencies=${symbolStr}`
     ).then(res => {
-      onLoadExchangeRate(res.rates)
+      if(res.error){
+        console.log(res.error);
+        setLoadError(res.error);
+      }
+      onLoadExchangeRate(res.quotes)
     })
   }, [])
+
+  if (loadError){
+    return (
+      <>
+        <h1>Error</h1>
+        <p>{loadError.info}</p>
+      </>
+    )
+  }
 
   if (!rates) {
     return <h1>Loading...</h1>
   }
+  
 
   const handleModalClose = () => setModalShow(false);
   const handleRowClick = sym => {
@@ -43,6 +58,7 @@ const Home = props => {
   return (
     <>
       <Layout>
+        <h1>Current Base Currency: {baseCurrency}</h1>
         <DataTable rowClicked={handleRowClick} />
         <DataChart />
         <CalcModal
